@@ -3,7 +3,7 @@
    <application
         android:label="sunnet_svaki_dan"
         android:name="${applicationName}"
-        android:icon="@mipmap/ic_launcher">
+        android:icon="@mipmap-anydpi-v26/ic_launcher">
         <activity
             android:name=".MainActivity"
             android:exported="true"

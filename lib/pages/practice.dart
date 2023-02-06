@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:rive/rive.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class PracticePage extends StatefulWidget {
   const PracticePage({super.key});
@@ -11,6 +12,21 @@ class PracticePage extends StatefulWidget {
 class _PracticePageState extends State<PracticePage> {
   int _counter = 0;
   SMINumber? score;
+  List<String> _likes = [];
+
+  @override
+  void initState() {
+    super.initState();
+    _getLikes();
+  }
+
+  _getLikes() async {
+    final prefs = await SharedPreferences.getInstance();
+    setState(() {
+      _likes = prefs.getStringList("likes") ?? [];
+    });
+    _increaseScore();
+  }
 
   _onRiveInit(Artboard artboard) {
     final controller =
@@ -20,7 +36,7 @@ class _PracticePageState extends State<PracticePage> {
   }
 
   void _increaseScore() async {
-    for (var i = 0; i < 400; i++) {
+    for (var i = 0; i < _likes.length * 10; i++) {
       await Future.delayed(const Duration(microseconds: 1000));
       score?.value += 0.1;
     }
@@ -39,13 +55,10 @@ class _PracticePageState extends State<PracticePage> {
             SizedBox(
               width: 300,
               height: 300,
-              child: GestureDetector(
-                onTap: _increaseScore,
-                child: RiveAnimation.asset(
-                  'images/level-heart.riv',
-                  fit: BoxFit.cover,
-                  onInit: _onRiveInit,
-                ),
+              child: RiveAnimation.asset(
+                'images/level-heart.riv',
+                fit: BoxFit.cover,
+                onInit: _onRiveInit,
               ),
             ),
             Padding(

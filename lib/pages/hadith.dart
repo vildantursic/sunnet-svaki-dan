@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:rive/rive.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:sunnet_svaki_dan/models/category.dart';
 import 'package:sunnet_svaki_dan/models/hadith.dart';
 import 'package:flutter_share/flutter_share.dart';
+import 'package:sunnet_svaki_dan/widgets/hadith-item.dart';
 
 class HadithPage extends StatefulWidget {
   const HadithPage({super.key, required this.category, required this.hadith});
@@ -15,66 +17,73 @@ class HadithPage extends StatefulWidget {
 }
 
 class _HadithPageState extends State<HadithPage> {
-  SMIBool? _bump;
+  SMIBool? _like;
+  List<String> _likes = [];
+
+  @override
+  void initState() {
+    super.initState();
+    _getLikes();
+  }
+
+  _getLikes() async {
+    final prefs = await SharedPreferences.getInstance();
+    final likes = prefs.getStringList("likes") ?? [];
+
+    setState(() {
+      _likes = likes;
+    });
+  }
 
   _onRiveInit(Artboard artboard) {
     final controller = StateMachineController.fromArtboard(artboard, 'liking');
     artboard.addController(controller!);
-    _bump = controller.findInput<bool>('like') as SMIBool;
+    _like = controller.findInput<bool>('like') as SMIBool;
+    if (_likes.contains(widget.hadith.id)) {
+      _like?.change(true);
+    }
   }
 
-  void _hitBump() {
-    _bump?.change(_bump!.value ? false : true);
+  void _likeHadith(String id) async {
+    final prefs = await SharedPreferences.getInstance();
+
+    _like?.change(_like!.value ? false : true);
+    if (_likes.contains(id)) {
+      setState(() {
+        _likes.remove(id);
+      });
+    } else {
+      setState(() {
+        _likes.add(id);
+      });
+    }
+
+    prefs.setStringList("likes", _likes);
   }
 
   Future<void> share(HadithModel item) async {
     await FlutterShare.share(
-        title: item.title,
-        text: item.body,
-        linkUrl: 'https://sunnet-svaki-dan.com/',
-        chooserTitle: item.title);
+      title: item.title,
+      text: "${item.title}\n${item.body}",
+      linkUrl: 'https://sunnet-svaki-dan.com/',
+      chooserTitle: item.title,
+    );
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        leading: BackButton(
+          onPressed: () => Navigator.pop(context, true),
+        ),
         title: Text(widget.category.name),
       ),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            Image.asset('images/decorate-top.png',
-                width: MediaQuery.of(context).size.width / 2),
-            Padding(
-                padding: const EdgeInsets.fromLTRB(20, 20, 20, 20),
-                child: Column(
-                  children: [
-                    Text(
-                      widget.hadith.title,
-                      style: const TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 20,
-                      ),
-                    ),
-                    const SizedBox(height: 10),
-                    Text(
-                      widget.hadith.body,
-                    ),
-                    const SizedBox(height: 10),
-                    Text(
-                      widget.hadith.carrier,
-                      style: const TextStyle(
-                        fontWeight: FontWeight.w500,
-                        fontSize: 10,
-                        color: Colors.teal,
-                      ),
-                    )
-                  ],
-                )),
-            Image.asset('images/decorate-bottom.png',
-                width: MediaQuery.of(context).size.width / 1.2),
+            HadithItem(hadith: widget.hadith),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
@@ -82,9 +91,9 @@ class _HadithPageState extends State<HadithPage> {
                   width: 80,
                   height: 80,
                   child: GestureDetector(
-                    onTap: _hitBump,
+                    onTap: () => _likeHadith(widget.hadith.id),
                     child: RiveAnimation.asset(
-                      'images/like2.riv',
+                      'images/like.riv',
                       fit: BoxFit.cover,
                       onInit: _onRiveInit,
                     ),

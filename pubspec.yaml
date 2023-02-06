@@ -1,5 +1,5 @@
 name: sunnet_svaki_dan
-description: A new Flutter project.
+description: Slijedi sunnet i zavoli poslanika.
 # The following line prevents the package from being accidentally published to
 # pub.dev using `flutter pub publish`. This is preferred for private packages.
 publish_to: 'none' # Remove this line if you wish to publish to pub.dev
@@ -37,6 +37,7 @@ dependencies:
   cupertino_icons: ^1.0.2
   rive: ^0.10.1
   flutter_share: ^2.0.0
+  shared_preferences: ^2.0.17
 
 dev_dependencies:
   flutter_test:

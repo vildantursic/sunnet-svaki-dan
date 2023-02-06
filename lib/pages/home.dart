@@ -4,15 +4,15 @@ import 'package:sunnet_svaki_dan/widgets/category-item.dart';
 
 List<CategoryModel> categories = [
   CategoryModel("food", "imageUrl", "Hrana", 1),
-  CategoryModel("friends", "imageUrl", "Drustvo", 1),
+  CategoryModel("friends", "imageUrl", "Društvo", 1),
   CategoryModel("travel", "imageUrl", "Putovanje", 1),
   CategoryModel("clothes", "imageUrl", "Odijevanje", 1),
   CategoryModel("pray", "imageUrl", "Namaz", 1),
-  CategoryModel("home", "imageUrl", "Kuca", 1),
-  CategoryModel("behavior", "imageUrl", "Ponasanje", 1),
+  CategoryModel("home", "imageUrl", "Kuća", 1),
+  CategoryModel("behavior", "imageUrl", "Ponašanje", 1),
   CategoryModel("daily", "imageUrl", "Hadis dana", 2),
   CategoryModel("practice", "imageUrl", "Praktikuj", 3),
-  CategoryModel("about", "imageUrl", "O nama", 4),
+  CategoryModel("about", "imageUrl", "O Nama", 4),
 ];
 
 class HomePage extends StatelessWidget {

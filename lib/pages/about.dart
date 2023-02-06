@@ -28,10 +28,10 @@ class AboutPage extends StatelessWidget {
                     TextSpan(text: 'Esselamu Alejkum,\n\n'),
                     TextSpan(
                         text:
-                            'Cilj ove aplikacije je da priblizi sunnet Allahovog poslanika s.a.w.s ljudima i uvede ga u svakodnevni zivot muslimana.'
-                            'Kroz aplikaciju mozete shvatiti koliko je sunnet vec dio vaseg svakodnevnog zivota ali niste ga svjesni.\n'
-                            'Ova aplikacija je tu kako bi vas prisjetila da su to sunneti i povecala vasa dobra djelakoja cinite u svakodnevnici.\n\n'
-                            'Molimo Allaha dz.s. da svakim danom, sljedjenjem sunneta, budemo blizi nasem najboljem primjeru Allahovom poslaniku Muhammedu s.a.w.s Amin.\n\n'),
+                            'Cilj ove aplikacije je da približi sunnet Allahovog poslanika s.a.w.s ljudima i uvede ga u svakodnevni život muslimana.'
+                            'Kroz aplikaciju možete shvatiti koliko je sunnet već dio vašeg svakodnevnog života ali niste ga svjesni.\n'
+                            'Ova aplikacija je tu kako bi vas prisjetila da su to sunneti i povecala vaša dobra djela koja činite u svakodnevnici.\n\n'
+                            'Molimo Allaha dž.s. da svakim danom, sljeđenjem sunneta, budemo bliži našem najboljem primjeru Allahovom poslaniku Muhammedu s.a.w.s, Amin.\n\n'),
                     TextSpan(
                       text: '#sunnetsvakidan\n\n',
                       style: TextStyle(fontWeight: FontWeight.bold),
