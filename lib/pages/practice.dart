@@ -1,4 +1,7 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:rive/rive.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -10,20 +13,31 @@ class PracticePage extends StatefulWidget {
 }
 
 class _PracticePageState extends State<PracticePage> {
+  int _total = 0;
   int _counter = 0;
   SMINumber? score;
-  List<String> _likes = [];
 
   @override
   void initState() {
     super.initState();
+    _readJson();
     _getLikes();
+  }
+
+  _readJson() async {
+    final String response = await rootBundle.loadString('storage/hadith.json');
+    final data = await json.decode(response) as List;
+    setState(() {
+      _total = data.length;
+    });
   }
 
   _getLikes() async {
     final prefs = await SharedPreferences.getInstance();
+    final likes = prefs.getStringList("likes") ?? [];
+
     setState(() {
-      _likes = prefs.getStringList("likes") ?? [];
+      _counter = likes.length;
     });
     _increaseScore();
   }
@@ -36,7 +50,7 @@ class _PracticePageState extends State<PracticePage> {
   }
 
   void _increaseScore() async {
-    for (var i = 0; i < _likes.length * 10; i++) {
+    for (var i = 0; i < (100 / _total * _counter) * 10; i++) {
       await Future.delayed(const Duration(microseconds: 1000));
       score?.value += 0.1;
     }
