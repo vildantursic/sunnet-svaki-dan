@@ -37,7 +37,7 @@ class _DailyPageState extends State<DailyPage> {
       final foundHadith = list.firstWhere((item) => item.id == dailyId);
 
       setState(() {
-        _isGenerated = currentTime.isAfter(daily);
+        _isGenerated = daily.isAfter(currentTime);
         if (foundHadith.id != "") {
           _hadith = foundHadith;
         }
@@ -64,7 +64,8 @@ class _DailyPageState extends State<DailyPage> {
       _isGenerated = true;
       _visible = true;
     });
-    prefs.setString("dailyDate", DateTime.now().toString());
+    prefs.setString(
+        "dailyDate", DateTime.now().add(const Duration(days: 1)).toString());
     prefs.setString("dailyId", _hadith.id);
   }
 

@@ -1,4 +1,4 @@
-package com.example.sunnet_svaki_dan
+package com.sunnetsvakidan
 
 import io.flutter.embedding.android.FlutterActivity
 

@@ -65,7 +65,7 @@ class _HadithPageState extends State<HadithPage> {
     await FlutterShare.share(
       title: item.title,
       text: "${item.title}\n${item.body}",
-      linkUrl: 'https://sunnet-svaki-dan.com/',
+      linkUrl: 'https://sunnetsvakidan.com/',
       chooserTitle: item.title,
     );
   }

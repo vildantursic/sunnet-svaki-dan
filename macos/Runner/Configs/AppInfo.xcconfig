@@ -8,7 +8,7 @@
 PRODUCT_NAME = sunnet_svaki_dan
 
 // The application's bundle identifier
-PRODUCT_BUNDLE_IDENTIFIER = com.example.sunnetSvakiDan
+PRODUCT_BUNDLE_IDENTIFIER = com.sunnetsvakidan
 
 // The copyright displayed in application information
-PRODUCT_COPYRIGHT = Copyright © 2023 com.example. All rights reserved.
+PRODUCT_COPYRIGHT = Copyright © 2023 com.sunnetsvakidan. All rights reserved.

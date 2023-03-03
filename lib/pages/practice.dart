@@ -51,7 +51,7 @@ class _PracticePageState extends State<PracticePage> {
 
   void _increaseScore() async {
     for (var i = 0; i < (100 / _total * _counter) * 10; i++) {
-      await Future.delayed(const Duration(microseconds: 1000));
+      await Future.delayed(const Duration(microseconds: 1500));
       score?.value += 0.1;
     }
   }
@@ -60,7 +60,7 @@ class _PracticePageState extends State<PracticePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Praktikuj Hadis"),
+        title: const Text("Praktikuj Sunnet"),
       ),
       body: Center(
         child: Column(
@@ -81,7 +81,7 @@ class _PracticePageState extends State<PracticePage> {
                   width: MediaQuery.of(context).size.width / 2),
             ),
             Text(
-              'Praktikovao si ukupno ${_counter} hadisa',
+              'Praktikovao/la si ukupno ${_counter} hadisa',
               style: TextStyle(
                 fontWeight: FontWeight.bold,
                 color: Colors.teal.shade800,

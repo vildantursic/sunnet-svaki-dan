@@ -10,7 +10,7 @@ List<CategoryModel> categories = [
   CategoryModel("pray", "imageUrl", "Namaz", 1),
   CategoryModel("home", "imageUrl", "Kuća", 1),
   CategoryModel("behavior", "imageUrl", "Ponašanje", 1),
-  CategoryModel("daily", "imageUrl", "Hadis dana", 2),
+  CategoryModel("daily", "imageUrl", "Sunnet dana", 2),
   CategoryModel("practice", "imageUrl", "Praktikuj", 3),
   CategoryModel("about", "imageUrl", "O Nama", 4),
 ];
